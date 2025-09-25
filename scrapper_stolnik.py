@@ -1,24 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import os
-from dotenv import load_dotenv
 
-
-load_dotenv()
-
-GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
-SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
-WORKSHEET_ID = int(os.getenv("WORKSHEET_ID"))
-
-
-urls = {'https://stroyryad.com.ua/cat/lyst-chornyi': [2821, 2823, 2829, 7784, 7791],
-        'https://stroyryad.com.ua/cat/lyst-ryflenyi': [10515],
-        'https://stroyryad.com.ua/cat/lyst-perforovanyi': [7165],
-        'https://stroyryad.com.ua/cat/lyst-prosichno-vytiazhnyi': [6650],
-        'https://stroyryad.com.ua/cat/truby-profilni': [2897, 3469, 13525, 16080, 3406, 3029, 3027, ],
-        'https://stroyryad.com.ua/cat/kutyk-katanyi': [2975, 7458, 6216],
-        'https://stroyryad.com.ua/cat/armatura': [2857],
-        'https://stroyryad.com.ua/cat/smuha': [12764]}
 
 products = {'sheet_1mm_1000_2000': {'url': 'https://stroyryad.com.ua/cat/lyst-chornyi', 'id': 2821},
             'sheet_2mm_1000_2000': {'url': 'https://stroyryad.com.ua/cat/lyst-chornyi', 'id': 2823},
@@ -39,7 +21,11 @@ products = {'sheet_1mm_1000_2000': {'url': 'https://stroyryad.com.ua/cat/lyst-ch
             'corner_30_30_3': {'url': 'https://stroyryad.com.ua/cat/kutyk-katanyi', 'id': 7458},
             'corner_50_50_3': {'url': 'https://stroyryad.com.ua/cat/kutyk-katanyi', 'id': 6216},
             'armature_8mm': {'url': 'https://stroyryad.com.ua/cat/armatura', 'id': 2857},
-            'stripe_20_4': {'url': 'https://stroyryad.com.ua/cat/smuha', 'id': 12764}}
+            'stripe_20_4': {'url': 'https://stroyryad.com.ua/cat/smuha', 'id': 12764},
+            'rod_m10': {'url': 'https://stroyryad.com.ua/cat/shpylky', 'id': 3418},
+            'screw_m10': {'url': 'https://stroyryad.com.ua/cat/haiky', 'id': 3423},
+            'navis_16': {'url': 'https://stroyryad.com.ua/cat/navisy', 'id': 3132}
+            }
 
 
 def get_prices_and_name(url, pid):

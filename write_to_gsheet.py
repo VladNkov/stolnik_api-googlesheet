@@ -78,6 +78,15 @@ worksheet.update(range_name='E25:F25', values=[[value['name'], value['price']]])
 value = all_prices['stripe_20_4']
 worksheet.update(range_name='E26:F26', values=[[value['name'], value['price']]])
 
+value = all_prices['rod_m10']
+worksheet.update(range_name='E27:F27', values=[[value['name'], value['price']]])
+
+value = all_prices['screw_m10']
+worksheet.update(range_name='E28:F28', values=[[value['name'], value['price']]])
+
+value = all_prices['navis_16']
+worksheet.update(range_name='E29:F29', values=[[value['name'], value['price']]])
+
 today = datetime.today().strftime('%d.%m.%Y %H:%M')
 worksheet.update(range_name='F3', values=[[today]])
 
