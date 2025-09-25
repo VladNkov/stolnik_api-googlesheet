@@ -1,1 +1,6 @@
 .idea/
+innate-vigil-413910-fba5430aca0d.json
+.env
+__pycache__/
+*.pyc
+*.pyo
