@@ -1,5 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
+WORKSHEET_ID = int(os.getenv("WORKSHEET_ID"))
+
 
 urls = {'https://stroyryad.com.ua/cat/lyst-chornyi': [2821, 2823, 2829, 7784, 7791],
         'https://stroyryad.com.ua/cat/lyst-ryflenyi': [10515],
@@ -22,7 +33,7 @@ def get_prices(url, product_ids):
         tds = tr.find_all('td')
         price = (tds[2].get_text(strip=True))
         price = price.replace('грн.', '').replace('\xa0', '').strip()
-
+        price = float(price.replace(',', '.'))
         prices[pid] = price
     return prices
 
@@ -31,8 +42,23 @@ all_prices = {}
 for url, ids in urls.items():
     all_prices.update(get_prices(url, ids))
 
-for pid, price in all_prices.items():
-    print(f'{pid}: {price}')
+# for pid, price in all_prices.items():
+#     print(f'{pid}: {price}')
+
+
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDENTIALS, scope)
+client = gspread.authorize(creds)
+
+spreadsheet = client.open_by_key(SPREADSHEET_ID)
+worksheet = spreadsheet.get_worksheet_by_id(WORKSHEET_ID)
+worksheet.append_row(["Product ID", "Price"])
+
+value = all_prices[2897]
+worksheet.update('F14', [[value]])
+
+
+print("Цены загружены в Google Sheets!")
 
 
 # product2 = soup.find('a', href="/cat/lyst-chornyi/product/2823")
