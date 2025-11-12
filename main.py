@@ -1,6 +1,8 @@
 import sys
-from scrapper_stolnik import all_prices
+from scrapper_stolnik import get_all_prices
 import write_to_gsheet
+
+all_prices = get_all_prices()
 
 
 def main():
