@@ -42,10 +42,16 @@ def get_prices_and_name(url, pid):
     return {"name": name, "price": price}
 
 
-all_prices = {}
-for key, info in products.items():
-    result = get_prices_and_name(info['url'], info['id'])
-    all_prices[key] = result
+def get_all_prices():
+    all_prices = {}
+    for key, info in products.items():
+        try:
+            result = get_prices_and_name(info['url'], info['id'])
+            all_prices[key] = result
+        except Exception as e:
+            all_prices[key] = {'name': 'error', 'price': 0}
+            print(f'Ошибка для {key}: {e}')
+    return all_prices
 
 
 
