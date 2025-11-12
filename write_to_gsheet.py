@@ -3,7 +3,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import os
 from dotenv import load_dotenv
 from datetime import datetime
-from scrapper_stolnik import all_prices
+from scrapper_stolnik import get_all_prices
 
 load_dotenv()
 
@@ -17,6 +17,8 @@ client = gspread.authorize(creds)
 
 spreadsheet = client.open_by_key(SPREADSHEET_ID)
 worksheet = spreadsheet.get_worksheet_by_id(WORKSHEET_ID)
+all_prices = get_all_prices()
+
 
 value = all_prices['sheet_1mm_1000_2000']
 worksheet.update(range_name='E8:F8', values=[[value['name'], value['price']]])
