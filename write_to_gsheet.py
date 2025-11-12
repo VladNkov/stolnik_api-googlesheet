@@ -7,7 +7,8 @@ from scrapper_stolnik import get_all_prices
 
 load_dotenv()
 
-GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
+# GOOGLE_CREDENTIALS = os.getenv("GOOGLE_CREDENTIALS")
+GOOGLE_CREDENTIALS = "/opt/airflow/projects/stolnik_api-googlesheet/innate-vigil-413910-fba5430aca0d.json"
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
 WORKSHEET_ID = int(os.getenv("WORKSHEET_ID"))
 
